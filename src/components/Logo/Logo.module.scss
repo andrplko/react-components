@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  text-decoration: none;
+  color: $black-color;
+}
+
+.image {
+  max-width: 100px;
+  width: 100%;
+  height: auto;
+}

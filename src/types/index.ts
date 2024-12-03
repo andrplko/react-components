@@ -1,44 +1,36 @@
 import { ReactNode } from 'react';
 
-export interface ICharacter {
+export enum Pathnames {
+  index = '/',
+  release = '/release',
+  id = ':id',
+}
+
+export interface Release {
   id: number;
-  name: string;
-  image: string;
-  species: string;
-  gender: string;
+  title: string;
+  cover_image: string;
+  year: string;
+  style: string[];
+  genre: string[];
 }
 
-export interface IAppState {
-  searchTerm: string;
-  characters: ICharacter[];
-  isLoading: boolean;
+export interface PaginationData {
+  page: number;
+  per_page: number;
+  pages: number;
+  items: number;
 }
 
-export interface IMainProps {
-  characters: ICharacter[];
-  isLoading: boolean;
-}
-
-export interface ISearchTermProps {
-  setSearchTerm: (searchTerm: string) => void;
-}
+export type ReleasesResponse = {
+  results: Release[];
+  pagination: PaginationData;
+};
 
 export type ChildrenProps = {
   children?: ReactNode;
 };
 
-export interface IErrorBoundaryState {
+export interface ErrorBoundaryState {
   hasError: boolean;
-}
-
-export type ApiCharactersData = { results: ICharacter[] } | undefined;
-
-export interface ICharactersListProps {
-  characters: ICharacter[];
-}
-
-export type PlaceholderProps = Record<string, never>;
-
-export interface IErrorButtonState {
-  error: Error | null;
 }

@@ -1,25 +1,26 @@
-import { Component } from 'react';
-import Logo from '../../assets/logo.svg';
+import { Dispatch, SetStateAction } from 'react';
 import Wrapper from '../Wrapper';
+import ErrorButton from '../ErrorButton';
 import SearchBar from '../SearchBar';
-import { ISearchTermProps } from '../../types';
+import Logo from '../Logo';
 import styles from './Header.module.scss';
 
-class Header extends Component<ISearchTermProps> {
-  render() {
-    const { setSearchTerm } = this.props;
-
-    return (
-      <header className={styles.header}>
-        <Wrapper>
-          <div className={styles.container}>
-            <img src={Logo} alt="logo" className={styles.logo} />
-            <SearchBar setSearchTerm={setSearchTerm} />
-          </div>
-        </Wrapper>
-      </header>
-    );
-  }
+interface HeaderProps {
+  setSearchTerm: Dispatch<SetStateAction<string>>;
 }
+
+const Header = ({ setSearchTerm }: HeaderProps) => {
+  return (
+    <header className={styles.header}>
+      <Wrapper>
+        <div className={styles.container}>
+          <Logo />
+          <SearchBar setSearchTerm={setSearchTerm} />
+          <ErrorButton />
+        </div>
+      </Wrapper>
+    </header>
+  );
+};
 
 export default Header;

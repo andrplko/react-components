@@ -1,4 +1,16 @@
-export const createQuery = (searchTerm: string) => {
-  const trimmedSearchTerm = searchTerm.trim();
-  return trimmedSearchTerm ? `name=${trimmedSearchTerm}&page=1` : 'page=1';
+export const createQuery = (
+  searchTerm: string,
+  currentPage: number,
+  perPage: number
+): URLSearchParams => {
+  const queryParams = new URLSearchParams({
+    q: searchTerm.trim(),
+    type: 'release',
+    page: String(currentPage),
+    per_page: String(perPage),
+    key: 'AyyuOYnNpDGwMNjfpPCb',
+    secret: 'VZIzlQzsmldhOYpSFEVzJuscZDJjxAOq',
+  });
+
+  return queryParams;
 };

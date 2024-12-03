@@ -1,41 +1,34 @@
-import { Component } from 'react';
-import { PlaceholderProps, IErrorButtonState } from '../../types';
+import { useState, useEffect } from 'react';
 import styles from './ErrorButton.module.scss';
 
-class ErrorButton extends Component<PlaceholderProps, IErrorButtonState> {
-  state = {
-    error: null,
-  };
+const ErrorButton = () => {
+  const [error, setError] = useState<Error | null>(null);
 
-  throwTestError = () => {
+  const throwTestError = () => {
     throw new Error('This is a test error');
   };
 
-  handleClick = () => {
+  const handleClick = () => {
     try {
-      this.throwTestError();
+      throwTestError();
     } catch (error) {
       if (error instanceof Error) {
-        this.setState({ error });
+        setError(error);
       }
     }
   };
 
-  render() {
-    if (this.state.error) {
-      throw this.state.error;
+  useEffect(() => {
+    if (error) {
+      throw error;
     }
+  }, [error]);
 
-    return (
-      <button
-        type="button"
-        onClick={this.handleClick}
-        className={styles.button}
-      >
-        Error
-      </button>
-    );
-  }
-}
+  return (
+    <button type="button" onClick={handleClick} className={styles.button}>
+      Error
+    </button>
+  );
+};
 
 export default ErrorButton;

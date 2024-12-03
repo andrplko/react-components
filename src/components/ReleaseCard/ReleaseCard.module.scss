@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  max-height: 230px;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow:
+    0 2px 1px -1px #0003,
+    0 1px 1px #00000024,
+    0 1px 3px #0000001f;
+  background-color: $white-color;
+  transition: box-shadow 0.2s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.content {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.image {
+  display: block;
+  min-width: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.text {
+  margin-top: 10px;
+}

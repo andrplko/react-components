@@ -1,25 +1,47 @@
 import { createQuery } from '../helpers/createQuery';
-import { ApiCharactersData } from '../types';
+import { ReleasesResponse } from '../types';
 
-const BASE_URL = 'https://rickandmortyapi.com/api/character/';
+const BASE_URL = 'https://api.discogs.com/database/search';
+const RELEASES_URL = 'https://api.discogs.com/releases/';
 
-export const fetchCharacters = async (searchTerm: string) => {
-  const query = createQuery(searchTerm);
-  const url = `${BASE_URL}?${query}`;
-
+export const fetchReleases = async (
+  searchTerm: string,
+  currentPage: number,
+  perPage: number
+) => {
   try {
-    const response = await fetch(url);
+    const queryParams = createQuery(searchTerm, currentPage, perPage);
+
+    const response = await fetch(`${BASE_URL}?${queryParams}`, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
 
     if (!response.ok) {
-      throw new Error('Something went wrong');
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data: ApiCharactersData = await response.json();
+    const data: ReleasesResponse = await response.json();
     return data;
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error(error);
-      throw error;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const fetchSingleRelease = async (id: string) => {
+  try {
+    const response = await fetch(`${RELEASES_URL}${id}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };

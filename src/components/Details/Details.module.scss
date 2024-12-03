@@ -1,0 +1,14 @@
+.tracklist {
+  max-height: 361px;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: $border-radius;
+  background-color: $bg-color;
+  overflow: scroll;
+  list-style: none;
+}
+
+.track {
+  display: flex;
+  justify-content: space-between;
+}
